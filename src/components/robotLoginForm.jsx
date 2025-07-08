@@ -103,49 +103,73 @@ const RobotLoginForm = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
-        <h2>Robot Login</h2>
-        <input
-          type="text"
-          placeholder="Robot ID"
-          value={robotId}
-          onChange={(e) => setRobotId(e.target.value)}
-          required
-          disabled={isLoading}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          disabled={isLoading}
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Logging in...' : 'Login'}
-        </button>
-        
-        {/* Status indicators for debugging */}
-        {/* <div style={{ marginTop: '20px', fontSize: '12px', color: '#666' }}>
-          <div>WebSocket Status: <span style={{ fontWeight: 'bold' }}>{websocketStatus}</span></div>
-          {mqttMessageReceived && (
-            <div style={{ color: 'green' }}>
-              ✓ MQTT Authentication Message Received
-            </div>
-          )}
-        </div> */}
-        
-        {/* Debug button - remove in production */}
-        {/* {process.env.NODE_ENV === 'development' && (
+        <div className="form-header">
+          <div className="brand-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" fill="currentColor"/>
+              <circle cx="12" cy="18" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h2 className="form-title">Robot Login</h2>
+          <p className="form-subtitle">Access your robot dashboard</p>
+        </div>
+
+        <div className="form-fields">
+          <div className="input-group">
+            <label htmlFor="robotId">Robot ID</label>
+            <input
+              id="robotId"
+              type="text"
+              placeholder="Enter your robot ID"
+              value={robotId}
+              onChange={(e) => setRobotId(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
           <button 
-            type="button" 
-            onClick={getWebSocketData}
-            style={{ marginTop: '10px', fontSize: '10px' }}
+            type="submit" 
+            className="login-button"
+            disabled={isLoading}
           >
-            Debug: Log WebSocket Data
+            {isLoading ? (
+              <span className="button-content">
+                <span className="spinner"></span>
+                Signing in...
+              </span>
+            ) : (
+              'Sign In'
+            )}
           </button>
-        )} */}
+        </div>
+
+        <div className="form-footer">
+          <p>
+            Don't have a robot account?{' '}
+            <span 
+              className="form-link" 
+              onClick={() => navigate('/robot-signup')}
+            >
+              Create one here
+            </span>
+          </p>
+        </div>
       </form>
     </div>
   );

@@ -1,4 +1,3 @@
-// No major changes, just pass restaurantId to RobotList
 import React, { useEffect, useState } from 'react';
 import EmployeeList from './employeeList';
 import RobotList from './robotList';
@@ -37,13 +36,35 @@ const RestaurantDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1>Restaurant Dashboard</h1>
-        <button className="add-menu-btn" onClick={() => navigate('/add-menu-item')}>+ Add Menu Item</button>
+      {/* Floating decorative elements */}
+      <div className="floating-elements">
+        <div className="floating-icon floating-icon-1">🍽️</div>
+        <div className="floating-icon floating-icon-2">🤖</div>
+        <div className="floating-icon floating-icon-3">👥</div>
+        <div className="floating-icon floating-icon-4">🔧</div>
       </div>
+
+      <div className="dashboard-header">
+        <div className="header-content">
+          <h1 className="dashboard-title">Restaurant Dashboard</h1>
+          <p className="dashboard-subtitle">Manage your restaurant operations with ease</p>
+        </div>
+        <button 
+          className="add-menu-btn" 
+          onClick={() => navigate('/add-menu-item')}
+        >
+          <span className="btn-icon">+</span>
+          Add Menu Item
+        </button>
+      </div>
+
       <div className="dashboard-grid">
-        <EmployeeList employees={employees} onAdd={() => navigate('/employee-signup')} />
-        <RobotList robots={robots} onAdd={() => navigate('/robot-signup')} restaurantId={restaurantId} />
+        <div className="dashboard-section employees-section">
+          <EmployeeList employees={employees} onAdd={() => navigate('/employee-signup')} />
+        </div>
+        <div className="dashboard-section robots-section">
+          <RobotList robots={robots} onAdd={() => navigate('/robot-signup')} restaurantId={restaurantId} />
+        </div>
       </div>
     </div>
   );
