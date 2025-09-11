@@ -41,20 +41,52 @@ const EmployeeSignupForm = () => {
   };
 
   return (
-    <div className="signup-page">
-    <form className="signup-form" onSubmit={handleSubmit}>
-      <h2>Employee Signup</h2>
-      <input name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
-      <input name="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-      <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-      
-      <button type="submit" disabled={status.loading}>
-        {status.loading ? 'Signing up...' : 'Signup'}
-      </button>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <div className="form-header">
+          <div className="brand-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" fill="currentColor"/>
+              <circle cx="12" cy="18" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h2 className="form-title">Employee Signup</h2>
+          <p className="form-subtitle">Create a new employee account</p>
+        </div>
 
-      {status.error && <p className="error">{status.error}</p>}
-      {status.success && <p className="success">{status.success}</p>}
-    </form>
+        <div className="form-fields">
+          <div className="input-group">
+            <label htmlFor="name">Full Name</label>
+            <input name="name" id="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
+          </div>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input name="email" id="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input name="password" id="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+          </div>
+          <button type="submit" className="signup-button" disabled={status.loading}>
+            {status.loading ? 'Signing up...' : 'Signup'}
+          </button>
+        </div>
+
+        {/* <div className="form-footer">
+          <p>
+            Already have an account?{' '}
+            <span 
+              className="form-link" 
+              onClick={() => navigate('/employee-login')}
+            >
+              Login here
+            </span>
+          </p>
+        </div> */}
+
+        {status.error && <p className="error">{status.error}</p>}
+        {status.success && <p className="success">{status.success}</p>}
+      </form>
     </div>
   );
 };

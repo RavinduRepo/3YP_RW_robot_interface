@@ -1,11 +1,409 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* CSS Custom Properties */
+:root {
+  --primary-navy: #0a0e27;
+  --secondary-navy: #1a1f3a;
+  --midnight-blue: #2d3561;
+  --deep-blue: #1e2a5e;
+  --accent-coral: #ff6b6b;
+  --accent-orange: #ffa726;
+  --glass-white: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: #b8c5d6;
+  --text-muted: #8a9bb5;
+  --shadow-primary: rgba(0, 0, 0, 0.3);
+  --shadow-secondary: rgba(0, 0, 0, 0.1);
+  --blur-amount: 20px;
+  --border-radius: 24px;
+}
+
+/* Page container with gradient background */
+.restaurant-menu-page {
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(135deg, 
+    var(--primary-navy) 0%, 
+    var(--secondary-navy) 25%, 
+    var(--midnight-blue) 50%, 
+    var(--deep-blue) 75%, 
+    var(--secondary-navy) 100%
+  );
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Floating background decorative elements */
+.page-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(40px);
+  animation: floatOrb 8s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, var(--accent-coral), var(--accent-orange));
+  top: 10%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-coral));
+  bottom: 20%;
+  left: 5%;
+  animation-delay: -3s;
+}
+
+.orb-3 {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(225deg, var(--accent-coral), var(--accent-orange));
+  top: 50%;
+  left: 80%;
+  animation-delay: -6s;
+}
+
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-15px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px) rotate(270deg);
+  }
+}
+
+/* Main page container */
+.page-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header section */
+.page-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--glass-white);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: 
+    0 8px 32px var(--shadow-primary),
+    0 4px 16px var(--shadow-secondary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    text-shadow: 0 4px 30px rgba(255, 107, 107, 0.2);
+  }
+}
+
+.page-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin: 0;
+  opacity: 0.9;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+/* Header accent line */
+.header-accent {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--accent-coral) 25%, 
+    var(--accent-orange) 50%, 
+    var(--accent-coral) 75%, 
+    transparent 100%
+  );
+  border-radius: 3px;
+  transform: translateX(-50%);
+  animation: accentPulse 2s ease-in-out infinite;
+}
+
+@keyframes accentPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1.1);
+  }
+}
+
+/* Menu content container */
+.menu-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Enhanced restaurant menu styling */
 .restaurant-menu {
-    padding: 2rem;
-    text-align: center;
+  padding: 2rem;
+  text-align: center;
+  background: var(--glass-white);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: 
+    0 8px 32px var(--shadow-primary),
+    0 4px 16px var(--shadow-secondary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.restaurant-menu:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 48px var(--shadow-primary),
+    0 6px 24px var(--shadow-secondary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.restaurant-menu h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  line-height: 1.3;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: inline-block;
+}
+
+.restaurant-menu h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-coral), var(--accent-orange));
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.restaurant-menu:hover h2::after {
+  width: 100%;
+}
+
+.restaurant-menu h2:hover {
+  color: var(--accent-coral);
+  text-shadow: 0 2px 20px rgba(255, 107, 107, 0.4);
+}
+
+/* Additional menu elements styling */
+.restaurant-menu p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.restaurant-menu ul,
+.restaurant-menu ol {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.restaurant-menu li {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.restaurant-menu li::before {
+  content: '🍽️';
+  position: absolute;
+  left: -0.5rem;
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
   }
   
-.restaurant-menu h2 {
-  margin-bottom: 1rem;
-  color: white;
-  text-shadow: 2px 2px 4px black;
-}
+  .page-header {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+  }
   
+  .restaurant-menu {
+    padding: 1.5rem;
+  }
+  
+  .orb-1 {
+    width: 150px;
+    height: 150px;
+    top: 5%;
+    right: 5%;
+  }
+  
+  .orb-2 {
+    width: 100px;
+    height: 100px;
+    bottom: 10%;
+    left: 5%;
+  }
+  
+  .orb-3 {
+    width: 80px;
+    height: 80px;
+    top: 40%;
+    left: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 0.5rem;
+  }
+  
+  .page-header {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .restaurant-menu {
+    padding: 1rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .floating-orb {
+    display: none; /* Hide decorative elements on very small screens */
+  }
+}
+
+/* Accessibility and Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .floating-orb,
+  .page-title,
+  .header-accent,
+  .restaurant-menu,
+  .restaurant-menu h2 {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.restaurant-menu:focus-within {
+  outline: 2px solid var(--accent-coral);
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .page-header,
+  .restaurant-menu {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--text-primary);
+  }
+  
+  .page-title,
+  .restaurant-menu h2 {
+    color: var(--text-primary);
+    -webkit-text-fill-color: var(--text-primary);
+  }
+  
+  .page-subtitle,
+  .restaurant-menu p {
+    color: var(--text-primary);
+  }
+}
+
+/* Print styles */
+@media print {
+  .floating-orb,
+  .header-accent {
+    display: none;
+  }
+  
+  .restaurant-menu-page {
+    background: white;
+  }
+  
+  .page-title,
+  .restaurant-menu h2 {
+    color: black;
+    text-shadow: none;
+  }
+}
